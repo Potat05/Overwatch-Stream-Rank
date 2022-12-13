@@ -3,7 +3,7 @@
     "battletag": "battletag",
 
     "_comment1_": "What role to display rank of. Options: TANK DPS HEALER AVERAGE HIGHEST",
-    "rank_role": "average",
+    "rank_role": "HIGHEST",
 
 
 
