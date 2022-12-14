@@ -1,9 +1,7 @@
 
 const settings = require('./settings.json');
 const fs = require('fs');
-const path = require('path');
 const http = require('http');
-const https = require('https');
 
 
 
@@ -17,83 +15,58 @@ const MIME_TYPES = {
 
 
 
-http.createServer(async (request, response) => {
+http.createServer((request, response) => {
 
-    console.log(`"${request.url}"`);
+    const url = new URL(request.url, `http://${request.headers.host}`);
 
-    if(request.url.startsWith('/profile/')) {
+    console.log(`"${url.pathname}"`);
 
-        const battletag = request.url.split('/').filter(s => s.length != 0).pop();
-        const profile_url = `https://overwatch.blizzard.com/en-us/career/${battletag}/`;
+    if(url.pathname.startsWith('/api/')) {
 
-        console.log(`Getting profile "${profile_url}"`);
+        // Idk if theres any better way to do this.
+        const apiFile = 'file://' + __dirname + url.pathname + '.js';
 
-        https.get(profile_url, result => {
+        import(apiFile).then(data => {
 
-            let data = [];
-            result.on('data', chunk => data.push(chunk));
-            result.on('end', () => {
+            const func = data[Object.keys(data)[0]];
 
-                const str = data.reduce((str, chunk) => str + new TextDecoder().decode(chunk), '');
+            func(request, response);
 
-                // fs.writeFile('./test.html', str, undefined, err => {
-                //     if(err) console.error(err);
-                // });
+        }).catch(reason => {
 
-                const profileData = {
-                    battletag: battletag.replace('-', '#'),
-                    rank: {
-                        tank: str.match(/role\/tank.+?icons\/rank\/(\w+-\d)/s)?.[1],
-                        damage: str.match(/role\/offense.+?icons\/rank\/(\w+-\d)/s)?.[1],
-                        support: str.match(/role\/support.+?icons\/rank\/(\w+-\d)/s)?.[1]
-                    }
-                }
-
-                response.writeHead(200, {
-                    'Content-Type': MIME_TYPES['json']
-                });
-                response.end(JSON.stringify(profileData));
-                
-            });
-
-        }).on('error', err => {
-            console.error(err);
-        });
-
-    } else if(request.url == '/favicon.ico') {
-
-        fs.readFile('./favicon.png', (err, data) => {
-
-            if(err) {
-                console.error(`Could not get favicon.`);
-            } else {
-                response.writeHead(200, {
-                    'Content-Type': MIME_TYPES['png']
-                });
-                response.end(data);
-            }
+            response.writeHead(404);
+            response.end('Status: Not Found.');
 
         });
 
     } else {
 
-        const file = __dirname + request.url;
+        if(url.pathname == '/favicon.ico') {
+            url.pathname = '/favicon.png';
+        }
+
+        const file = __dirname + url.pathname;
 
         fs.readFile(file, (err, data) => {
 
             if(err) {
-                console.error(`Could not get file "${file}"`);
+
+                response.writeHead(404);
+                response.end('Status: Not Found.');
+
             } else {
+
                 response.writeHead(200, {
                     'Content-Type': MIME_TYPES[file.split('.').pop()]
                 });
                 response.end(data);
+
             }
 
         });
 
     }
 
-}).listen(settings.port, undefined, undefined, () => {
-    console.info(`Overwatch fetch profile server opened at: http://127.0.0.1:${settings.port}`);
+}).listen(settings.port, settings.hostname, undefined, () => {
+    console.info(`Overwatch fetch profile server opened at: http://${settings.hostname}:${settings.port}`);
 });

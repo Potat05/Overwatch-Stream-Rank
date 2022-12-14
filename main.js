@@ -1,4 +1,6 @@
 
+
+
 const RANKS = [
     'BronzeTier-5',
     'BronzeTier-4',
@@ -49,11 +51,22 @@ const RANKS = [
 
 /**
  * @typedef {Object} PROFILE  
+ * @property {boolean} exists - If profile exists.  
+ * @property {string} url - Profile URL.  
+ * @property {boolean} private - If profile is private.  
  * @property {string} battletag - Battle tag.  
+ * @property {string} name - Name.  
+ * @property {string} portrait - Portrait URL.  
+ * @property {string} title - Title.  
+ * @property {string} banner - Banner URL. (DOES NOT EXIST CURRENTLY.)  
+ * @property {number} endorsement - Endorsement leve.  
  * @property {object} rank - Ranks for each role.  
  * @property {string} [rank.tank] - Tank role rank.  
  * @property {string} [rank.damage] - Damage role rank.  
  * @property {string} [rank.support] - Support role rank.  
+ * @property {object} stats - Stats for mode.  
+ * @property {object} [stats.quickPlay] - Quickplay mode.  
+ * @property {object} [stats.competitive] - Competitive mode.  
  */
 
 
@@ -76,10 +89,10 @@ async function fetch_settings() {
 async function fetch_profile(settings) {
     if(settings == undefined) return;
 
-    const profile_url = `http://127.0.0.1:${settings.port}/profile/${settings.battletag.replace('#', '-')}/`;
-    console.debug(`Fetching profile "${profile_url}"`);
+    const url = new URL('./api/profile', location.origin);
+    url.searchParams.set('battletag', settings.battletag);
 
-    return await (await fetch(profile_url)).json();
+    return await (await fetch(url.href)).json();
 }
 
 /**
@@ -88,6 +101,9 @@ async function fetch_profile(settings) {
  * @param {PROFILE} profile    
  */
 function display_profile(settings, profile) {
+
+    if(!profile.exists) return;
+    if(profile.private) return;
 
     let icon = null;
 

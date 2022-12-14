@@ -1,17 +1,20 @@
 {
     "_comment0_": "Your battle.net tag. Your profile MUST be public!",
-    "battletag": "battletag",
+    "battletag": "kerbybit#1483",
 
     "_comment1_": "What role to display rank of. Options: TANK DPS HEALER AVERAGE HIGHEST",
-    "rank_role": "HIGHEST",
+    "rank_role": "highest",
 
 
 
     "_comment2_": "Here are some advanced settings you may change and tweak to get the best experience.",
 
-    "_comment3_": "Port number of server.",
+    "_comment3_": "Host of server.",
+    "hostname": "127.0.0.1",
+
+    "_comment4_": "Port number of server.",
     "port": 24209,
 
-    "_comment4_": "How often the display updates with new rank. (I've tested before, And it only seems to change every hour, So anything below that wont do anything.)",
+    "_comment5_": "How often the display updates with new rank. (I've tested before, And it only seems to change every hour, So anything below that wont do anything.)",
     "profile_updaterate_minutes": 61
 }
