@@ -91,6 +91,7 @@ async function fetch_profile(settings) {
 
     const url = new URL('./api/profile', location.origin);
     url.searchParams.set('battletag', settings.battletag);
+    url.searchParams.set('stats', 'false');
 
     return await (await fetch(url.href)).json();
 }

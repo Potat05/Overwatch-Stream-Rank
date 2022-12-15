@@ -14,7 +14,10 @@ function api_profile(request, response) {
 
     console.info(`api/profile: Fetching profile of ${url.searchParams.get('battletag')}`);
 
-    owapi.profile(url.searchParams.get('battletag')).then(profile => {
+    const battletag = url.searchParams.get('battletag');
+    const getStats = ['1', 'true', 'yes', null].includes(url.searchParams.get('stats').toLowerCase());
+
+    owapi.profile(battletag, getStats).then(profile => {
 
         if(profile != null) {
             
