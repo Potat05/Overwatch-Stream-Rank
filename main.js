@@ -91,7 +91,7 @@ async function fetch_profile(settings) {
 
     const url = new URL('./api/profile', location.origin);
     url.searchParams.set('battletag', settings.battletag);
-    url.searchParams.set('stats', 'false');
+    url.searchParams.set('stats', false);
 
     return await (await fetch(url.href)).json();
 }
@@ -113,13 +113,16 @@ function display_profile(settings, profile) {
         case 'tank': {
             icon = profile.rank.tank;
             break; }
-        case 'damage': {
+        case 'damage':
+        case 'dps': {
             icon = profile.rank.damage;
             break; }
-        case 'support': {
+        case 'support':
+        case 'healer': {
             icon = profile.rank.support;
             break; }
-        case 'average': {
+        case 'average': 
+        case 'avg': {
             let avg = 0;
             let numRanks = 0;
             for(let key in profile.rank) {
