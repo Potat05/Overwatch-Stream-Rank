@@ -120,7 +120,7 @@ const owapi = {
                             
                             const modeStr = str.match(new RegExp(`stats ${mode}-view.*?">.+?</blz-section>`, 's'))?.[0];
 
-                            const heroes = modeStr.match(/<option value="\d+" option-id="(.+?)">.+?<\/option>/g).map(oStr => {
+                            const heroes = modeStr.match(/<option value="\d+" option-id=".+?">.+?<\/option>/g).map(oStr => {
                                 return oStr.match(/option-id="(.+?)"/)?.[1];
                             });
     
