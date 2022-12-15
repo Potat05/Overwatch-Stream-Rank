@@ -12,10 +12,10 @@ function api_profile(request, response) {
     
     const url = new URL(request.url, `http://${request.headers.host}`);
 
-    console.info(`api/profile: Fetching profile of ${url.searchParams.get('battletag')}`);
-
     const battletag = url.searchParams.get('battletag');
-    const getStats = ['1', 'true', 'yes', null].includes(url.searchParams.get('stats').toLowerCase());
+    const getStats = ['1', 'true', 'yes', null].includes(url.searchParams.get('stats')?.toLowerCase());
+
+    console.info(`api/profile: Fetching profile of ${battletag}, getStats: ${getStats}`);
 
     owapi.profile(battletag, getStats).then(profile => {
 
