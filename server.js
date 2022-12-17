@@ -41,27 +41,50 @@ http.createServer((request, response) => {
 
     } else {
 
-        if(url.pathname == '/favicon.ico') {
-            url.pathname = '/favicon.png';
+        let file = null;
+
+        if(url.pathname.startsWith('/pages/')) {
+
+            if(url.pathname.split('/').pop().includes('.')) {
+                file = __dirname + url.pathname;
+            } else {
+                file = __dirname + url.pathname + '/index.html';
+            }
+
+        } else if(url.pathname.startsWith('/resource/')) {
+
+            file = __dirname + url.pathname;
+
+        } else if(url.pathname == '/favicon.ico') {
+
+            file = __dirname + '/favicon.png';
+
         }
 
-        const file = __dirname + url.pathname;
+
+
+        if(file == null) {
+            response.writeHead(404);
+            response.end('Status: Not Found.');
+
+            return;
+        }
+
+
 
         fs.readFile(file, (err, data) => {
 
             if(err) {
-
                 response.writeHead(404);
                 response.end('Status: Not Found.');
 
-            } else {
-
-                response.writeHead(200, {
-                    'Content-Type': MIME_TYPES[file.split('.').pop()]
-                });
-                response.end(data);
-
+                return;
             }
+
+            response.writeHead(200, {
+                'Content-Type': MIME_TYPES[file.split('.').pop()]
+            });
+            response.end(data);
 
         });
 

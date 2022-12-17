@@ -6,7 +6,7 @@ const fs = require('fs');
 
 
 /**
- * @typedef {Object} PROFILE  
+ * @typedef {object} PROFILE  
  * @property {boolean} exists - If profile exists.  
  * @property {string} url - Profile URL.  
  * @property {boolean} private - If profile is private.  
@@ -176,6 +176,255 @@ const owapi = {
                 reject(reason);
             });
         });
+    },
+
+
+
+    ranks: {
+        'BronzeTier-5': {
+            name: 'BronzeTier-5',
+            icon: '/resource/BronzeTier-5.png',
+            value: 0,
+            competitvePoints: 65
+        },
+
+        'BronzeTier-4': {
+            name: 'BronzeTier-4',
+            icon: '/resource/BronzeTier-4.png',
+            value: 1,
+            competitivePoints: 65
+        },
+
+        'BronzeTier-3': {
+            name: 'BronzeTier-3',
+            icon: '/resource/BronzeTier-3.png',
+            value: 2,
+            competitivePoints: 65
+        },
+
+        'BronzeTier-2': {
+            name: 'BronzeTier-2',
+            icon: '/resource/BronzeTier-2.png',
+            value: 3,
+            competitivePoints: 65
+        },
+
+        'BronzeTier-1': {
+            name: 'BronzeTier-1',
+            icon: '/resource/BronzeTier-1.png',
+            value: 4,
+            competitivePoints: 65
+        },
+
+        'SilverTier-5': {
+            name: 'SilverTier-5',
+            icon: '/resource/SilverTier-5.png',
+            value: 5,
+            competitivePoints: 125
+        },
+
+        'SilverTier-4': {
+            name: 'SilverTier-4',
+            icon: '/resource/SilverTier-4.png',
+            value: 6,
+            competitivePoints: 125
+        },
+
+        'SilverTier-3': {
+            name: 'SilverTier-3',
+            icon: '/resource/SilverTier-3.png',
+            value: 7,
+            competitivePoints: 125
+        },
+
+        'SilverTier-2': {
+            name: 'SilverTier-2',
+            icon: '/resource/SilverTier-2.png',
+            value: 8,
+            competitivePoints: 125
+        },
+
+        'SilverTier-1': {
+            name: 'SilverTier-1',
+            icon: '/resource/SilverTier-1.png',
+            value: 9,
+            competitivePoints: 125
+        },
+
+        'GoldTier-5': {
+            name: 'GoldTier-5',
+            icon: '/resource/GoldTier-5.png',
+            value: 10,
+            competitivePoints: 256
+        },
+
+        'GoldTier-4': {
+            name: 'GoldTier-4',
+            icon: '/resource/GoldTier-4.png',
+            value: 11,
+            competitivePoints: 250
+        },
+
+        'GoldTier-3': {
+            name: 'GoldTier-3',
+            icon: '/resource/GoldTier-3.png',
+            value: 12,
+            competitivePoints: 250
+        },
+
+        'GoldTier-2': {
+            name: 'GoldTier-2',
+            icon: '/resource/GoldTier-2.png',
+            value: 13,
+            competitivePoints: 250
+        },
+
+        'GoldTier-1': {
+            name: 'GoldTier-1',
+            icon: '/resource/GoldTier-1.png',
+            value: 14,
+            competitivePoints: 250
+        },
+
+        'PlatinumTier-5': {
+            name: 'PlatinumTier-5',
+            icon: '/resource/PlatinumTier-5.png',
+            value: 15,
+            competitivePoints: 500
+        },
+
+        'PlatinumTier-4': {
+            name: 'PlatinumTier-4',
+            icon: '/resource/PlatinumTier-4.png',
+            value: 16,
+            competitivePoints: 500
+        },
+
+        'PlatinumTier-3': {
+            name: 'PlatinumTier-3',
+            icon: '/resource/PlatinumTier-3.png',
+            value: 17,
+            competitivePoints: 500
+        },
+
+        'PlatinumTier-2': {
+            name: 'PlatinumTier-2',
+            icon: '/resource/PlatinumTier-2.png',
+            value: 18,
+            competitivePoints: 500
+        },
+
+        'PlatinumTier-1': {
+            name: 'PlatinumTier-1',
+            icon: '/resource/PlatinumTier-1.png',
+            value: 19,
+            competitivePoints: 500
+        },
+
+        'DiamondTier-5': {
+            name: 'DiamondTier-5',
+            icon: '/resource/DiamondTier-5.png',
+            value: 20,
+            competitivePoints: 750
+        },
+
+        'DiamondTier-4': {
+            name: 'DiamondTier-4',
+            icon: '/resource/DiamondTier-4.png',
+            value: 21,
+            competitivePoints: 750
+        },
+
+        'DiamondTier-3': {
+            name: 'DiamondTier-3',
+            icon: '/resource/DiamondTier-3.png',
+            value: 22,
+            competitivePoints: 750
+        },
+
+        'DiamondTier-2': {
+            name: 'DiamondTier-2',
+            icon: '/resource/DiamondTier-2.png',
+            value: 23,
+            competitivePoints: 750
+        },
+
+        'DiamondTier-1': {
+            name: 'DiamondTier-1',
+            icon: '/resource/DiamondTier-1.png',
+            value: 24,
+            competitivePoints: 750
+        },
+
+        'MasterTier-5': {
+            name: 'MasterTier-5',
+            icon: '/resource/MasterTier-5.png',
+            value: 25,
+            competitivePoints: 1200
+        },
+
+        'MasterTier-4': {
+            name: 'MasterTier-4',
+            icon: '/resource/MasterTier-4.png',
+            value: 26,
+            competitivePoints: 1200
+        },
+
+        'MasterTier-3': {
+            name: 'MasterTier-3',
+            icon: '/resource/MasterTier-3.png',
+            value: 27,
+            competitivePoints: 1200
+        },
+
+        'MasterTier-2': {
+            name: 'MasterTier-2',
+            icon: '/resource/MasterTier-2.png',
+            value: 28,
+            competitivePoints: 1200
+        },
+
+        'MasterTier-1': {
+            name: 'MasterTier-1',
+            icon: '/resource/MasterTier-1.png',
+            value: 29,
+            competitivePoints: 1200
+        },
+
+        'GrandmasterTier-5': {
+            name: 'GrandmasterTier-5',
+            icon: '/resource/GrandmasterTier-5.png',
+            value: 30,
+            competitivePoints: 1750
+        },
+
+        'GrandmasterTier-4': {
+            name: 'GrandmasterTier-4',
+            icon: '/resource/GrandmasterTier-4.png',
+            value: 31,
+            competitivePoints: 1750
+        },
+
+        'GrandmasterTier-3': {
+            name: 'GrandmasterTier-3',
+            icon: '/resource/GrandmasterTier-3.png',
+            value: 32,
+            competitivePoints: 1750
+        },
+
+        'GrandmasterTier-2': {
+            name: 'GrandmasterTier-2',
+            icon: '/resource/GrandmasterTier-2.png',
+            value: 33,
+            competitivePoints: 1750
+        },
+
+        'GrandmasterTier-1': {
+            name: 'GrandmasterTier-1',
+            icon: '/resource/GrandmasterTier-1.png',
+            value: 34,
+            competitivePoints: 1750
+        }
     }
 
 }

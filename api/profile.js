@@ -13,7 +13,7 @@ function api_profile(request, response) {
     const url = new URL(request.url, `http://${request.headers.host}`);
 
     const battletag = url.searchParams.get('battletag');
-    const getStats = ['1', 'true', 'yes', null].includes(url.searchParams.get('stats')?.toLowerCase());
+    const getStats = ['1', 'true', 'yes', null, undefined].includes(url.searchParams.get('stats')?.toLowerCase());
 
     console.info(`api/profile: Fetching profile of ${battletag}, getStats: ${getStats}`);
 
